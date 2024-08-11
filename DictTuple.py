@@ -10,6 +10,8 @@ class DictTuple:
     def __init__(self, *args):
         self.dt = list(args)
         if any(not isinstance(x, dict) for x in self.dt):
+            print("HHHHHHH")
+            print(self.dt)
             raise AssertionError("All input must be dictionaries")
 
         if (
