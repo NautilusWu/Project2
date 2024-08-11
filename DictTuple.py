@@ -103,7 +103,7 @@ class DictTuple:
 
     def __iter__(self):
         print(self.dt)
-        temp_dt = sorted(self.dt, reverse=True)
+        temp_dt = [self.dt[i] for i in range(len(self.dt) - 1, -1, -1)]
         print("L107", temp_dt)
         keys_list = [key for item in temp_dt for key in item]
         print('L109', keys_list)
