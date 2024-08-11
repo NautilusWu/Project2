@@ -9,19 +9,16 @@ class DictTuple:
 
     def __init__(self, *args):
         self.dt = list(args)
-        print(self.dt)
         if any(not isinstance(x, dict) for x in self.dt):
-            print("HHHHHHH")
-            print(self.dt)
             raise AssertionError("All input must be dictionaries")
 
-        # if (
-        #     any(len(x) == 0 for x in self.dt)
-        #     or len(self.dt) == 0
-        # ):
-        #     raise AssertionError(
-        #         "All input must be dictionaries with at least one element"
-        #     )
+        if (
+            any(len(x) == 0 for x in self.dt)
+            or len(self.dt) == 0
+        ):
+            raise AssertionError(
+                "All input must be dictionaries with at least one element"
+            )
 
     def __len__(self):
         distinct_keys = {key for item in self.dt for key in item}
@@ -151,7 +148,6 @@ class DictTuple:
         return self
 
     def __setattr__(self, name, value):
-        print(name, value)
         if (
             not isinstance(value, list)
             or any(not isinstance(x, dict) or len(x) == 0 for x in value)
