@@ -142,7 +142,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
         f"        return dict({{k: getattr(self, k) for k in self._fields}})\n"
     )
 
-    my_code += f"    def _make(self, iterable=[0,0]):\n"
+    my_code += f"    def _make(self, iterable=({{x:0,y:0}}):\n"
     my_code += f"        print(iterable)\n"
     # my_code += f"        print(self._fields)\n"
     # my_code += f"        if not iterable:\n"
