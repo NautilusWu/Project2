@@ -58,7 +58,7 @@ class DictTuple:
         print(key)
         if key not in distinct_keys:
             raise KeyError(f"Key '{key}' does not exist")
-        self.dt = [item for item in self.dt if key not in item]
+        self.dt = [item for item in self.dt if key not in distinct_keys]
         print(self.dt)
 
     def __call__(self, key):
