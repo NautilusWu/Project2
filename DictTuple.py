@@ -64,7 +64,6 @@ class DictTuple:
         for item in self.dt:
             temp_dict = {}
             for k, v in item.items():
-                # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + k, v)
                 if k != key:
                     temp_dict[k] = v
             if temp_dict:
@@ -86,21 +85,26 @@ class DictTuple:
             for inx, value in enumerate(lst_01)
         ]
 
+    # def __iter__(self):
+    #     keys_list = [key for item in self.dt for key in item]
+    #     distinct_keys = sorted(set(keys_list), key=keys_list.index)
+    #     my_iter_01 = []
+    #     for k in distinct_keys:
+    #         my_iter_01.append([item for item in self.dt if k in item][-1])
+    #     my_iter_02 = []
+    #     for item_dict in my_iter_01:
+    #         temp_dict = {}
+    #         for k in sorted(item_dict):
+    #             temp_dict[k] = item_dict[k]
+    #         my_iter_02.append(temp_dict)
+    #     # print(distinct_keys)
+    #     # print(my_iter_02)
+    #     return iter(my_iter_02)
+
     def __iter__(self):
         keys_list = [key for item in self.dt for key in item]
         distinct_keys = sorted(set(keys_list), key=keys_list.index)
-        my_iter_01 = []
-        for k in distinct_keys:
-            my_iter_01.append([item for item in self.dt if k in item][-1])
-        my_iter_02 = []
-        for item_dict in my_iter_01:
-            temp_dict = {}
-            for k in sorted(item_dict):
-                temp_dict[k] = item_dict[k]
-            my_iter_02.append(temp_dict)
-        # print(distinct_keys)
-        # print(my_iter_02)
-        return iter(my_iter_02)
+        return iter(distinct_keys)
 
     def __eq__(self, other):
         if not isinstance(other, (DictTuple, dict)):
