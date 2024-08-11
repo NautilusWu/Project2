@@ -142,15 +142,15 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
         f"        return dict({{k: getattr(self, k) for k in self._fields}})\n"
     )
 
-    my_code += f"    def _make(self, iterable):\n"
-    my_code += f"        print(iterable)\n"
+    my_code += f"    def _make(self, iterable=None):\n"
+    # my_code += f"        print(iterable)\n"
     # my_code += f"        print(self._fields)\n"
     # my_code += f"        if not iterable:\n"
     # my_code += f"           print('dllm')\n"
     # my_code += f"           raise TypeError('Iterable must have something')\n"
     my_code += f"        if iterable is None:\n"
-    my_code += f"            return {cls_name}()\n"
-    # my_code += f"           raise TypeError('Iterable must have something')\n"
+    # my_code += f"            return {cls_name}()\n"
+    my_code += f"           raise TypeError('Iterable must have something')\n"
     # my_code += f"        if not hasattr(iterable, '__iter__'):\n"
     # my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
     # my_code += f"        if len(iterable) != len(self._fields):\n"
@@ -185,8 +185,8 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     my_code += f"            raise AttributeError(f'{cls_name} object is immutable')\n"
     my_code += f"        super().__setattr__(name, value)\n"
 
-    print(my_code)
-    # exec(my_code)
+    # print(my_code)
+    exec(my_code)
     # print(f'\n--------\n{locals()}\n----------\n')
     return locals()[cls_name]
 
