@@ -102,6 +102,7 @@ class DictTuple:
     #     return iter(my_iter_02)
 
     def __iter__(self):
+        print(self.dt)
         keys_list = [key for item in self.dt for key in item]
         # distinct_keys = sorted(set(keys_list), key=keys_list.index)
         distinct_keys = sorted(set(keys_list))
