@@ -8,11 +8,12 @@ from mynamedtuple import mynamedtuple
 class DictTuple:
 
     def __init__(self, *args):
-        print(args)
         self.dt = list(args)
+        if any(not isinstance(x, dict) for x in self.dt):
+            raise AssertionError("All input must be dictionaries")
+
         if (
-            any(not isinstance(x, dict) for x in self.dt)
-            or any(len(x) == 0 for x in self.dt)
+            any(len(x) == 0 for x in self.dt)
             or len(self.dt) == 0
         ):
             raise AssertionError(
