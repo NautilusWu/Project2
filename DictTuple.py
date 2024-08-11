@@ -104,8 +104,15 @@ class DictTuple:
     def __iter__(self):
         print(self.dt)
         temp_dt = [self.dt[i] for i in range(len(self.dt) - 1, -1, -1)]
+        my_iter_02 = []
+        for item_dict in temp_dt:
+            temp_dict = {}
+            for k in sorted(item_dict):
+                temp_dict[k] = item_dict[k]
+            my_iter_02.append(temp_dict)
+
         print("L107", temp_dt)
-        keys_list = [key for item in temp_dt for key in item]
+        keys_list = [key for item in my_iter_02 for key in item]
         print('L109', keys_list)
         distinct_keys = sorted(set(keys_list), key=keys_list.index)
         print('L111', distinct_keys)
