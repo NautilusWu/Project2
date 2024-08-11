@@ -162,10 +162,10 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     my_code += f"        print('fields:',self._fields)\n"
     my_code += f"        print('defaults:', self._defaults)\n"
     my_code += f"        print('mutable:',self._mutable)\n"
-    # my_code += (
-    #     f"        if not all(k in self._fields for k in kargs.keys()):\n"
-    # )
-    # my_code += f"            raise ValueError('Invalid field names')\n"
+    my_code += (
+        f"        if not all(k in self._fields for k in kargs.keys()):\n"
+    )
+    my_code += f"            raise TypeError('Invalid field names')\n"
     my_code += f"        if self._mutable:\n"
     my_code += f"            for name in kargs.keys():\n"
     my_code += f"                setattr(self, name, kargs[name])\n"
