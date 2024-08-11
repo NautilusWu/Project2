@@ -60,10 +60,11 @@ class DictTuple:
             raise KeyError(f"Key '{key}' does not exist")
         new_dt = []
         for item in self.dt:
+            temp_dict = {}
             for k, v in item.items():
-                if k in distinct_keys:
-                    del item[k]
-            new_dt.append(item)
+                if k not in distinct_keys:
+                    temp_dict[k] = v
+            new_dt.append(temp_dict)
         self.dt = new_dt
         print(self.dt)
 
