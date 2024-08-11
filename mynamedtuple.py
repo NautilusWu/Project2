@@ -146,7 +146,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     # my_code += f"        print(iterable)\n"
     # my_code += f"        print(self._fields)\n"
     my_code += f"        if iterable is None:\n"
-    my_code += f"            iterable = []\n"
+    my_code += f"            return self\n"
     # my_code += f"            return self.__class__((6,2,3))\n"
     # my_code += f"        if not hasattr(iterable, '__iter__'):\n"
     # my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
@@ -196,7 +196,7 @@ def main():
     """
     Test the mynamedtuple function
     """
-    Point = mynamedtuple("Point", "x y z", defaults={"z": 0})
+    Point = mynamedtuple("Triple1", "a b c", defaults={"c": 0})
     Point2 = mynamedtuple(
         "Point2", "x  y z k", defaults={"y": 0, "z": 0, "k": "BB"}
     )
