@@ -146,7 +146,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     # my_code += f"        print(iterable)\n"
     # my_code += f"        print(self._fields)\n"
     my_code += f"        if iterable is None:\n"
-    my_code += f"            iterable = [Point._defaults[field] for field in Point._fields]\n"
+    my_code += f"            iterable = [self._defaults[field] for field in self._fields]\n"
     # my_code += f"            return self.__class__((6,2,3))\n"
     # my_code += f"        if not hasattr(iterable, '__iter__'):\n"
     # my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
