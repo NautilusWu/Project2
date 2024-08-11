@@ -155,6 +155,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     # my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
     # my_code += f"        if len(iterable) != len(self._fields):\n"
     # my_code += f"           raise TypeError(f'Expected {{len(self._fields)}} arguments')\n"
+    my_code += f"        print('TYPE', type(self.__class__(*iterable)))\n"
     my_code += f"        return self.__class__(*iterable)\n"
 
     my_code += f"    def _replace(self, **kargs):\n"
