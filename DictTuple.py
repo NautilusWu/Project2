@@ -55,6 +55,7 @@ class DictTuple:
                 inx for inx, item in enumerate(self.dt) if key in item
             )
             self.dt[max_inx][key] = value
+        print('!!!', self.dt)
 
     def __delitem__(self, key):
         # print(self.dt)
