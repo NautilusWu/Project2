@@ -8,6 +8,7 @@ from mynamedtuple import mynamedtuple
 class DictTuple:
 
     def __init__(self, *args):
+        print(args)
         self.dt = list(args)
         if (
             any(not isinstance(x, dict) for x in self.dt)
