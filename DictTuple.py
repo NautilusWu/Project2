@@ -53,10 +53,13 @@ class DictTuple:
             self.dt[max_inx][key] = value
 
     def __delitem__(self, key):
+        print(self.dt)
         distinct_keys = {key for item in self.dt for key in item}
+        print(key)
         if key not in distinct_keys:
             raise KeyError(f"Key '{key}' does not exist")
         self.dt = [item for item in self.dt if key not in item]
+        print(self.dt)
 
     def __call__(self, key):
         distinct_keys = {key for item in self.dt for key in item}
