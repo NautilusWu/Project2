@@ -62,7 +62,7 @@ class DictTuple:
         for item in self.dt:
             temp_dict = {}
             for k, v in item.items():
-                print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + k, v)
+                # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + k, v)
                 if k != key:
                     temp_dict[k] = v
             if temp_dict:
@@ -145,20 +145,20 @@ class DictTuple:
             self.dt = [*self.dt, other]
         return self
 
-    # def __setattr__(self, name, value):
-    #     if (
-    #         not isinstance(value, list)
-    #         or len(value) == 0
-    #         or any(len(x) == 0 or not isinstance(x, dict) for x in value)
-    #     ):
-    #         raise AssertionError(
-    #             "value must be dictionaries with at least one element"
-    #         )
-    #     if name != "dt":
-    #         raise AssertionError("Can not set attribute except 'dt'")
-    #     # if hasattr(self,'dt'):
-    #     #     return DictTuple({name: value})
-    #     return super().__setattr__(name, value)
+    def __setattr__(self, name, value):
+        if (
+            not isinstance(value, list)
+            or len(value) == 0
+            or any(len(x) == 0 or not isinstance(x, dict) for x in value)
+        ):
+            raise AssertionError(
+                "value must be dictionaries with at least one element"
+            )
+        if name != "dt":
+            raise AssertionError("Can not set attribute except 'dt'")
+        # if hasattr(self,'dt'):
+        #     return DictTuple({name: value})
+        return super().__setattr__(name, value)
 
 
 # Testing the DictTuple class
