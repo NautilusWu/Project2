@@ -158,7 +158,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     my_code += f"        return self.__class__(*iterable)\n"
 
     my_code += f"    def _replace(self, **kargs):\n"
-    # my_code += f"        print(kargs)\n"
+    my_code += f"        print(kargs)\n"
     my_code += (
         f"        if not all(k in self._fields for k in kargs.keys()):\n"
     )
