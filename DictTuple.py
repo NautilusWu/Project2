@@ -105,7 +105,7 @@ class DictTuple:
         print(self.dt)
         temp_dt = sorted(self.dt, reverse=True)
         print("L107", temp_dt)
-        keys_list = [key for item in temp_dt for key in item]
+        keys_list = [key for item in temp_dt for key in item.keys()]
         print(keys_list)
         distinct_keys = sorted(set(keys_list), key=keys_list.index)
         print(distinct_keys)
