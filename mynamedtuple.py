@@ -142,7 +142,8 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
         f"        return dict({{k: getattr(self, k) for k in self._fields}})\n"
     )
 
-    my_code += f"    def _make(self, iterable=None):\n"
+    my_code += f"    def _make(self, iterable):\n"
+    my_code += f"        print(iterable)"
     my_code += f"        if not hasattr(iterable, '__iter__'):\n"
     my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
     my_code += f"        if len(iterable) != len(self._fields):\n"
