@@ -150,7 +150,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     # my_code += f"           raise TypeError('Iterable must have something')\n"
     my_code += f"        if iterable is None:\n"
     # my_code += f"            return {cls_name}()\n"
-    my_code += f"            return self.__class__((1,2,3))\n"
+    my_code += f"            return self.__class__((6,2,3))\n"
     # my_code += f"        if not hasattr(iterable, '__iter__'):\n"
     # my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
     # my_code += f"        if len(iterable) != len(self._fields):\n"
@@ -212,6 +212,7 @@ def main():
     print(p == p2)
     print(p2._asdict())
     p3 = p._make("12S")
+    print('L215!!!!!!!!!!', type(p3))
     # p3 = p._make()
     print(p3._asdict())
     # print(p3.__class__.__dict__)
