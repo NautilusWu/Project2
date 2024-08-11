@@ -45,8 +45,8 @@ class DictTuple:
         return latest_dict[key]
 
     def __setitem__(self, key, value):
-        print(self.dt)
-        print(key, value)
+        # print(self.dt)
+        # print(key, value)
         distinct_keys = {key for item in self.dt for key in item}
         if key not in distinct_keys:
             self.dt.append({key: value})
@@ -55,7 +55,7 @@ class DictTuple:
                 inx for inx, item in enumerate(self.dt) if key in item
             )
             self.dt[max_inx][key] = value
-        print('!!!', self.dt)
+        # print('!!!', self.dt)
 
     def __delitem__(self, key):
         # print(self.dt)

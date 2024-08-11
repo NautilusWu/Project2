@@ -142,19 +142,28 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
         f"        return dict({{k: getattr(self, k) for k in self._fields}})\n"
     )
 
-    my_code += f"    def _make(self, iterable=None):\n"
-    # my_code += f"        print(iterable)\n"
-    # my_code += f"        print(self._fields)\n"
+    # my_code += f"    def _make(self, iterable=None):\n"
+    # # my_code += f"        print(iterable)\n"
+    # # my_code += f"        print(self._fields)\n"
+    # my_code += f"        if iterable is None:\n"
+    # # my_code += f"            iterable = {defaults}\n"
+    # my_code += f"            print(type(self))\n"
+    # # my_code += f"            return self.__class__((6,2,3))\n"
+    # # my_code += f"        if not hasattr(iterable, '__iter__'):\n"
+    # # my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
+    # # my_code += f"        if len(iterable) != len(self._fields):\n"
+    # # my_code += f"           raise TypeError(f'Expected {{len(self._fields)}} arguments')\n"
+    # my_code += f"        print('TYPE', type(self.__class__(*iterable)))\n"
+    # my_code += f"        return self.__class__(*iterable)\n"
+
+    my_code += f"    def _make(iterable=None):\n"
     my_code += f"        if iterable is None:\n"
-    # my_code += f"            iterable = {defaults}\n"
-    my_code += f"            print(type(self))\n"
-    # my_code += f"            return self.__class__((6,2,3))\n"
-    # my_code += f"        if not hasattr(iterable, '__iter__'):\n"
-    # my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
-    # my_code += f"        if len(iterable) != len(self._fields):\n"
-    # my_code += f"           raise TypeError(f'Expected {{len(self._fields)}} arguments')\n"
-    my_code += f"        print('TYPE', type(self.__class__(*iterable)))\n"
-    my_code += f"        return self.__class__(*iterable)\n"
+    my_code += f"            raise TypeError(f'Argument iterable cannot be empty')\n"
+    my_code += f"        if len(iterable) != len({cls_name}._fields):\n"
+    my_code += f"            raise TypeError(f'Expected {{len({cls_name}._fields)}} arguments')\n"
+    my_code += f"        values = tuple(iterable)\n"
+    my_code += f"        return {cls_name}(*values)\n"
+
 
     my_code += f"    def _replace(self, **kargs):\n"
     # my_code += f"        print('kargs:', kargs)\n"
@@ -188,7 +197,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     my_code += f"        super().__setattr__(name, value)\n"
 
     # print(my_code)
-    exec(my_code)
+    exec(my_code, locals())
     # print(f'\n--------\n{locals()}\n----------\n')
     return locals()[cls_name]
 
@@ -209,9 +218,9 @@ def main():
     print(repr(p2))
     print(p == p2)
     print(p2._asdict())
-    p3 = p._make("12S")
+    # p3 = p._make("12S")
+    p3 = p._make()
     print('L215!!!!!!!!!!', type(p3))
-    # p3 = p._make()
     print(p3._asdict())
     # print(p3.__class__.__dict__)
     p4 = p._replace(x="BBB")
