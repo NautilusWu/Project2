@@ -89,7 +89,7 @@ class DictTuple:
         ]
 
     def __iter__(self):
-        print(self.dt)
+        # print(self.dt)
         temp_dt = [self.dt[i] for i in range(len(self.dt) - 1, -1, -1)]
         my_iter_02 = []
         for item_dict in temp_dt:
