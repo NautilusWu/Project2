@@ -58,8 +58,13 @@ class DictTuple:
         print(key)
         if key not in distinct_keys:
             raise KeyError(f"Key '{key}' does not exist")
-        # self.dt = [item for item in self.dt if all(key1 not in distinct_keys for key1 in item)]
-        self.dt = [{'a': 1, 'b': 2}, {'d': 14, 'e': 15}]
+        new_dt = []
+        for item in self.dt:
+            for k, v in item.items():
+                if k in distinct_keys:
+                    del item[k]
+            new_dt.append(item)
+        self.dt = new_dt
         print(self.dt)
 
     def __call__(self, key):
