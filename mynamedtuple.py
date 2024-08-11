@@ -113,7 +113,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     my_code += f"            if isinstance(v, str)\n"
     my_code += f"            else f'{{k}}={{v}}')\n"
     my_code += f"            for k, v in self.__dict__.items()]\n"
-    my_code += f"        str1 =', '.join(lst)\n"
+    my_code += f"        str1 =','.join(lst)\n"
     my_code += f"        return f'{cls_name}({{str1}})'\n"
 
     for attr in field_names:
