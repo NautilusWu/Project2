@@ -142,7 +142,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
         f"        return dict({{k: getattr(self, k) for k in self._fields}})\n"
     )
 
-    my_code += f"    def _make(self, iterable=((x=0,y=0))):\n"
+    my_code += f"    def _make(self, iterable):\n"
     my_code += f"        print(iterable)\n"
     # my_code += f"        print(self._fields)\n"
     # my_code += f"        if not iterable:\n"
@@ -185,8 +185,8 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     my_code += f"            raise AttributeError(f'{cls_name} object is immutable')\n"
     my_code += f"        super().__setattr__(name, value)\n"
 
-    # print(my_code)
-    exec(my_code)
+    print(my_code)
+    # exec(my_code)
     # print(f'\n--------\n{locals()}\n----------\n')
     return locals()[cls_name]
 
