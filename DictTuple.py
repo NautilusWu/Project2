@@ -15,13 +15,13 @@ class DictTuple:
             print(self.dt)
             raise AssertionError("All input must be dictionaries")
 
-        if (
-            any(len(x) == 0 for x in self.dt)
-            or len(self.dt) == 0
-        ):
-            raise AssertionError(
-                "All input must be dictionaries with at least one element"
-            )
+        # if (
+        #     any(len(x) == 0 for x in self.dt)
+        #     or len(self.dt) == 0
+        # ):
+        #     raise AssertionError(
+        #         "All input must be dictionaries with at least one element"
+        #     )
 
     def __len__(self):
         distinct_keys = {key for item in self.dt for key in item}
