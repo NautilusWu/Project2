@@ -142,8 +142,9 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
         f"        return dict({{k: getattr(self, k) for k in self._fields}})\n"
     )
 
-    my_code += f"    def _make(self, iterable=()):\n"
+    my_code += f"    def _make(self, iterable):\n"
     my_code += f"        print(iterable)\n"
+    my_code += f"        print(self._fields)\n"
     # my_code += f"        if not iterable:\n"
     # my_code += f"           print('dllm')\n"
     # my_code += f"           raise TypeError('Iterable must have something')\n"
