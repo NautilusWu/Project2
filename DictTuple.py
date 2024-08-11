@@ -151,10 +151,11 @@ class DictTuple:
         return self
 
     def __setattr__(self, name, value):
+        print(name, value)
         if (
             not isinstance(value, list)
+            or any(not isinstance(x, dict) or len(x) == 0 for x in value)
             or len(value) == 0
-            or any(len(x) == 0 or not isinstance(x, dict) for x in value)
         ):
             raise AssertionError(
                 "value must be dictionaries with at least one element"
@@ -169,7 +170,8 @@ class DictTuple:
 # Testing the DictTuple class
 def main():
     coordinate = mynamedtuple("coordinate", "x y")
-    d = DictTuple({"c1": coordinate(1, 2)}, {"c1": coordinate(3, 4)})
+    # d = DictTuple({"c1": coordinate(1, 2)}, {"c1": coordinate(3, 4)})
+    d = DictTuple(1)
     # d = DictTuple({"c1": "AAA"}, {"c1": "BBB"}, {"c2": "CCC"}, {"c1": "DDD"})
     # d = DictTuple({'c1': 'AAA'})
     # d = DictTuple(1)
