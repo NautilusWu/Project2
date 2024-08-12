@@ -182,6 +182,9 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     my_code += f"        super().__setattr__(name, value)\n"
 
     # print(my_code)
-    exec(my_code, locals())
+    try:
+        exec(my_code, locals())
+    except Exception as e:
+        raise Exception("Unexpected exec() Error") from e
     # print(f'\n--------\n{locals()}\n----------\n')
     return locals()[cls_name]
