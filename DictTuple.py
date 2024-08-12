@@ -2,8 +2,6 @@
 SCI 33 Project 2: Customized namedtuple class DictTuple
 """
 
-from mynamedtuple import mynamedtuple
-
 
 class DictTuple:
 
@@ -163,90 +161,3 @@ class DictTuple:
         # if hasattr(self,'dt'):
         #     return DictTuple({name: value})
         return super().__setattr__(name, value)
-
-
-# Testing the DictTuple class
-def main():
-    coordinate = mynamedtuple("coordinate", "x y")
-    # d = DictTuple({"c1": coordinate(1, 2)}, {"c1": coordinate(3, 4)})
-    d = DictTuple(1)
-    # d = DictTuple({"c1": "AAA"}, {"c1": "BBB"}, {"c2": "CCC"}, {"c1": "DDD"})
-    # d = DictTuple({'c1': 'AAA'})
-    # d = DictTuple(1)
-    print(len(d))
-    print(d.dt)
-    print(bool(d))
-    print(d)
-    print("c1" in d)
-    print("c2" in d)
-    print(d["c1"])
-    # print(d["c3"])
-    d["c1"] = "FFFF"
-    print(d["c1"])
-    print(d.dt)
-    d["c3"] = "GGGG"
-    print(d.dt)
-    del d["c1"]
-    print(d.dt)
-    # del d["c1"]
-    e = DictTuple(
-        {"f1": coordinate(1, 2), "c5": coordinate(7, 8)},
-        {"c1": coordinate(3, 4), "c2": coordinate(9, 10)},
-        {"c1": coordinate("AAA", "BBB")},
-    )
-    print(f"e.dt: {e.dt}")
-    print(f"e('c1'): {e('c1')}")
-    print(f"e('c2'): {e('c2')}")
-    print(f"e['c1']: {e['c1']}")
-    print(f"e['c2']: {e['c2']}")
-    print("===== iter =====")
-    for i, item in enumerate(e):
-        print(i, item)
-    e2 = DictTuple(
-        {"c1": coordinate(3, 4), "c2": coordinate(9, 10)},
-        {"f1": coordinate(1, 2), "c5": coordinate(7, 8)},
-        {"c1": coordinate("AAA", "BBB")},
-    )
-    print("==============")
-    print(f"e == e2: {e == e2}")
-    dict_01 = {
-        "c2": coordinate(9, 10),
-        "f1": coordinate(1, 2),
-        "c5": coordinate(7, 8),
-        "c1": coordinate("AAA", "BBB"),
-        # "c3": "GGGG",
-    }
-    print("==============")
-    print(f"e == dict_01: {e == dict_01}")
-    print(f"e2 == dict_01: {e2 == dict_01}")
-    print(f"e2 == 'ABCD': {e2 == 'ABCD'}")
-
-    print("========= + =========")
-    d1 = DictTuple({"c1": coordinate(1, 2)}, {"c1": coordinate(3, 4)})
-    d2 = DictTuple({"c2": coordinate(1, 2)}, {"c3": coordinate(3, 4)})
-    d3 = d1 + d2
-    print(d3.dt)
-    d4 = d2 + d1
-    print(d4.dt)
-    adt = DictTuple({"c1": coordinate(1, 2)}, {"c1": coordinate(3, 4)})
-    adict = {"c3": coordinate(3, 4)}
-    print(adt + adict)
-    print(adict + adt)
-    # print(adt + 'ABCD')
-    print("========= += =========")
-    d1 = DictTuple({"c1": coordinate(1, 2)}, {"c1": coordinate(3, 4)})
-    d2 = DictTuple({"c2": coordinate(1, 2)}, {"c3": coordinate(3, 4)})
-    adict = {"c3": coordinate(3, 4)}
-    d1 += d2
-    print(d1)
-    d1 += adict
-    print(d1)
-    # d1 += 'ABCD'
-    print(d1.dt)
-    # setattr(d1, "dt", [{'ss' : coordinate(50, 60)}])
-    setattr(d1, "dt", [{"s": "s"}])
-    print(d1)
-
-
-if __name__ == "__main__":
-    main()

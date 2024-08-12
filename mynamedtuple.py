@@ -12,10 +12,10 @@ def chk_field_names(field_names) -> bool:
     rtn = False
     if isinstance(field_names, list):
         if all(
-            isinstance(name, str)
-            and name.isidentifier()
-            and (name not in kwlist)
-            for name in field_names
+                isinstance(name, str)
+                and name.isidentifier()
+                and (name not in kwlist)
+                for name in field_names
         ):
             rtn = True
     if isinstance(field_names, str):
@@ -25,10 +25,10 @@ def chk_field_names(field_names) -> bool:
         else:
             field_names_lst = field_names.split()
         if all(
-            isinstance(field_name, str)
-            and field_name.isidentifier()
-            and field_name not in kwlist
-            for field_name in field_names_lst
+                isinstance(field_name, str)
+                and field_name.isidentifier()
+                and field_name not in kwlist
+                for field_name in field_names_lst
         ):
             rtn = True
     return rtn
@@ -53,9 +53,9 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     # print(type_name, field_names, mutable, defaults)
 
     type_name_check = (
-        isinstance(type_name, str)
-        and type_name.isidentifier()
-        and type_name not in kwlist
+            isinstance(type_name, str)
+            and type_name.isidentifier()
+            and type_name not in kwlist
     )
     field_names_check = chk_field_names(field_names)
     if defaults is None:
@@ -71,7 +71,7 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     mutable_check = isinstance(mutable, bool)
     # print(type_name_check, field_names_check, defaults_check, mutable_check)
     if not all(
-        [type_name_check, field_names_check, defaults_check, mutable_check]
+            [type_name_check, field_names_check, defaults_check, mutable_check]
     ):
         raise SyntaxError(
             "Type names, field names and defaults must be valid identifiers"
@@ -142,20 +142,6 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
         f"        return dict({{k: getattr(self, k) for k in self._fields}})\n"
     )
 
-    # my_code += f"    def _make(self, iterable=None):\n"
-    # # my_code += f"        print(iterable)\n"
-    # # my_code += f"        print(self._fields)\n"
-    # my_code += f"        if iterable is None:\n"
-    # # my_code += f"            iterable = {defaults}\n"
-    # my_code += f"            print(type(self))\n"
-    # # my_code += f"            return self.__class__((6,2,3))\n"
-    # # my_code += f"        if not hasattr(iterable, '__iter__'):\n"
-    # # my_code += f"           raise TypeError(f'Argument iterable cannot be empty')\n"
-    # # my_code += f"        if len(iterable) != len(self._fields):\n"
-    # # my_code += f"           raise TypeError(f'Expected {{len(self._fields)}} arguments')\n"
-    # my_code += f"        print('TYPE', type(self.__class__(*iterable)))\n"
-    # my_code += f"        return self.__class__(*iterable)\n"
-
     my_code += f"    def _make(iterable=None):\n"
     my_code += f"        if iterable is None:\n"
     my_code += f"            raise TypeError(f'Argument iterable cannot be empty')\n"
@@ -163,7 +149,6 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     my_code += f"            raise TypeError(f'Expected {{len({cls_name}._fields)}} arguments')\n"
     my_code += f"        values = tuple(iterable)\n"
     my_code += f"        return {cls_name}(*values)\n"
-
 
     my_code += f"    def _replace(self, **kargs):\n"
     # my_code += f"        print('kargs:', kargs)\n"
@@ -200,60 +185,3 @@ def mynamedtuple(type_name, field_names, mutable=False, defaults=None):
     exec(my_code, locals())
     # print(f'\n--------\n{locals()}\n----------\n')
     return locals()[cls_name]
-
-
-def main():
-    """
-    Test the mynamedtuple function
-    """
-    Point = mynamedtuple("Triple1", "a b c", defaults={"c": 0})
-    Point2 = mynamedtuple(
-        "Point2", "x  y z k", defaults={"y": 0, "z": 0, "k": "BB"}
-    )
-    # print(Point.__dict__)
-    p = Point("AAA", 1)
-    print(repr(p))
-    print(p[1])
-    p2 = Point2("AAA")
-    print(repr(p2))
-    print(p == p2)
-    print(p2._asdict())
-    # p3 = p._make("12S")
-    p3 = p._make()
-    print('L215!!!!!!!!!!', type(p3))
-    print(p3._asdict())
-    # print(p3.__class__.__dict__)
-    p4 = p._replace(x="BBB")
-    print(p4)
-    p5 = p._replace(x="BBB", y=100)
-    print(p5)
-    Point3 = mynamedtuple("Point3", "x y", mutable=False, defaults={"y": 1})
-    p6 = Point3(1)
-    print(p6._asdict())
-    p7 = p6._replace(x=2)
-    print(p6, p7)
-    Point4 = mynamedtuple("Point4", "x y", mutable=True, defaults={"y": 1})
-    p8 = Point4(1)
-    print(p8._asdict())
-    p9 = p8._replace(x=2)
-    print(p8, p9)
-    NamedTuple5 = mynamedtuple(
-        "NamedTuple5", "x y  z", mutable=True, defaults={"z": "ZZZ"}
-    )
-    nt10 = NamedTuple5(1, 2)
-    print(nt10)
-    setattr(nt10, "x", 100)
-    print(nt10)
-    setattr(nt10, "x1", 300)
-    print(nt10)
-    NamedTuple6 = mynamedtuple(
-        "NamedTuple6", "x y  z", mutable=False, defaults={"z": "ZZZ"}
-    )
-    nt11 = NamedTuple6(1, 2)
-    print(nt11)
-    setattr(nt11, "x1", 200)
-    print(nt11)
-
-
-if __name__ == "__main__":
-    main()
